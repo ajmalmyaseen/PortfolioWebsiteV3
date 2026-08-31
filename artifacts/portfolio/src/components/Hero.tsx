@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Code2, Github, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 
 export function Hero() {
@@ -96,6 +97,16 @@ export function Hero() {
               transition={{ delay: 0.7 }}
               className="flex gap-4"
             >
+              <a
+                href="https://wa.me/918086210987?text=Hi%20Ajmal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-lg bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all group"
+                aria-label="Chat on WhatsApp"
+                data-testid="link-whatsapp"
+              >
+                <FaWhatsapp className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
               <a
                 href="https://github.com/ajmalmyaseen/"
                 target="_blank"

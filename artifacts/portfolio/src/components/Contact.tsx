@@ -1,6 +1,7 @@
-﻿import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Github, Linkedin, Instagram, Facebook, ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 
 export function Contact() {
@@ -36,6 +37,9 @@ export function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4 mb-10"
         >
+          <a href="https://wa.me/918086210987?text=Hi%20Ajmal" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
+            <FaWhatsapp className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
           <a href="https://github.com/ajmalmyaseen/" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
             <Github className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
           </a>
