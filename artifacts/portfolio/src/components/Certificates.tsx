@@ -4,60 +4,33 @@ import { Award, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const certificates = [
-  {
-    id: 1,
-    title: 'Responsive Web Design',
-    issuer: 'freeCodeCamp',
-    date: '2023',
-    description: 'Comprehensive certification covering HTML5, CSS3, Flexbox, Grid, and responsive design principles.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop',
-  },
-  {
-    id: 2,
-    title: 'JavaScript Algorithms and Data Structures',
-    issuer: 'freeCodeCamp',
-    date: '2023',
-    description: 'In-depth coverage of JavaScript fundamentals, ES6, algorithms, and data structures.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=300&fit=crop',
-  },
-  {
-    id: 3,
-    title: 'Frontend Development Libraries',
-    issuer: 'freeCodeCamp',
-    date: '2024',
-    description: 'Mastery of Bootstrap, jQuery, React, Redux, and modern frontend development practices.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
-  },
-  {
-    id: 4,
-    title: 'Web Development Bootcamp',
-    issuer: 'Coursera',
-    date: '2023',
-    description: 'Complete web development course covering full-stack fundamentals and best practices.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop',
-  },
-  {
-    id: 5,
-    title: 'Advanced CSS and Sass',
-    issuer: 'Udemy',
-    date: '2024',
-    description: 'Advanced styling techniques, animations, Sass workflows, and modern CSS architecture.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=400&h=300&fit=crop',
-  },
-  {
-    id: 6,
-    title: 'React - The Complete Guide',
-    issuer: 'Udemy',
-    date: '2024',
-    description: 'Comprehensive React training including hooks, context, performance optimization, and Next.js.',
-    credentialUrl: '#',
-    logo: 'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?w=400&h=300&fit=crop',
-  },
+ {
+   id: 1,
+   title: 'Python Full Stack Development',
+   issuer: 'Inmakes',
+   date: '2023',
+   description: 'Completed comprehensive training in Python full-stack development, covering backend development, web technologies, databases, and building dynamic web applications.',
+   credentialUrl: null,
+   logo: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=300&fit=crop',
+ },
+ {
+   id: 2,
+   title: 'Java Boot Camp',
+   issuer: 'Lets Upgrade',
+   date: '2023',
+   description: 'Completed intensive training in Java programming, covering core Java concepts, object-oriented programming, problem-solving, and fundamental software development principles.',
+   credentialUrl: null,
+   logo: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=300&fit=crop',
+ },
+ {
+   id: 3,
+   title: 'Data Analytics Job Simulation',
+   issuer: 'Deloitte',
+   date: '2024',
+   description: 'Completed a Deloitte data analytics job simulation, gaining practical experience in data analysis, data visualization, business insights, and presenting data-driven solutions.',
+   credentialUrl: 'https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_6a2968bfbf55d0944bec9d91_1781101573379_completion_certificate.pdf',
+   logo: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+ },
 ];
 
 export function Certificates() {
@@ -131,22 +104,33 @@ export function Certificates() {
 
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-medium text-primary">{cert.date}</span>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-primary/30 hover:bg-primary/10"
-                      asChild
-                    >
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`link-credential-${cert.id}`}
-                      >
-                        View
-                        <ExternalLink className="w-3 h-3 ml-2" />
-                      </a>
-                    </Button>
+                   {cert.credentialUrl ? (
+                     <Button
+                       size="sm"
+                       variant="outline"
+                       className="border-primary/30 hover:bg-primary/10"
+                       asChild
+                     >
+                       <a
+                         href={cert.credentialUrl}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         data-testid={`link-credential-${cert.id}`}
+                       >
+                         View Certificate
+                         <ExternalLink className="w-3 h-3 ml-2" />
+                       </a>
+                     </Button>
+                   ) : (
+                     <Button
+                       size="sm"
+                       variant="outline"
+                       className="border-border/80 opacity-60 cursor-not-allowed pointer-events-none"
+                       disabled
+                     >
+                       View Certificate
+                     </Button>
+                   )}
                   </div>
                 </div>
 

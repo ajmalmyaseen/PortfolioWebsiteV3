@@ -6,66 +6,65 @@ import { Button } from '@/components/ui/button';
 const projects = [
   {
     id: 1,
-    title: 'Restaurant Landing Page',
-    description: 'A modern, responsive landing page for a fine dining restaurant featuring smooth animations, an interactive menu, and reservation system.',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
+    title: 'Portfolio Website v2',
+    description:
+      'A modern and responsive personal portfolio website showcasing my skills, projects, and professional profile with a clean and interactive user interface.',
+    image:
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
     demoUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ajmalmyaseen/PortfolioWebsiteV2',
     featured: true,
   },
   {
     id: 2,
-    title: 'E-Commerce Product Page',
-    description: 'Fully responsive product showcase with image gallery, cart functionality, and dynamic pricing calculations.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+    title: 'Country CRUD',
+    description:
+      'A React-based CRUD application for managing country data, allowing users to create, view, update, and delete country records through an interactive interface.',
+    image:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
     tags: ['React', 'CSS3', 'JavaScript'],
     demoUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ajmalmyaseen/country-crud',
     featured: true,
   },
   {
     id: 3,
-    title: 'Task Manager Dashboard',
-    description: 'Interactive task management application with drag-and-drop functionality, filters, and local storage persistence.',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
+    title: 'Secure Auth',
+    description:
+      'A secure authentication system built with React, featuring user registration, login functionality, form validation, and protected access to application pages.',
+    image:
+      'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
     tags: ['React', 'JavaScript', 'SCSS'],
     demoUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ajmalmyaseen/secure-auth',
     featured: false,
   },
   {
     id: 4,
-    title: 'Portfolio Website v1',
-    description: 'Personal portfolio website showcasing projects and skills with custom animations and smooth scroll effects.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop',
+    title: 'Portfolio Website v3',
+    description:
+      'A personal portfolio website designed to showcase my projects, technical skills, education, and contact information with a responsive and visually engaging layout.',
+    image:
+      'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
     demoUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ajmalmyaseen/PortfolioWebsiteV3',
     featured: false,
   },
   {
     id: 5,
-    title: 'Weather Forecast App',
-    description: 'Real-time weather application using OpenWeather API with location search and 5-day forecast display.',
-    image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&h=600&fit=crop',
-    tags: ['JavaScript', 'API', 'Bootstrap'],
+    title: 'Portfolio Website v1',
+    description:
+      'My first personal portfolio website, created to present my profile, technical skills, projects, and contact details through a simple and responsive web design.',
+    image:
+      'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop',
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
     demoUrl: '#',
-    githubUrl: '#',
-    featured: false,
-  },
-  {
-    id: 6,
-    title: 'Blog Platform UI',
-    description: 'Modern blog interface with article cards, category filters, and responsive layout design.',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop',
-    tags: ['React', 'CSS3', 'Bootstrap'],
-    demoUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ajmalmyaseen/PortfolioWebsite',
     featured: false,
   },
 ];
-
 export function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });

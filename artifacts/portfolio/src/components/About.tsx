@@ -7,8 +7,8 @@ import { Progress } from '@/components/ui/progress';
 const highlights = [
   {
     icon: Code2,
-    title: 'Frontend Focus',
-    description: 'Building responsive, modern and user-friendly web interfaces.',
+    title: 'Education',
+    description: 'Bachelor of Technology (B.Tech) – NEFTU - North East Frontier Technical University, Computer Science.',
   },
   {
     icon: Sparkles,
@@ -19,11 +19,6 @@ const highlights = [
     icon: Rocket,
     title: 'Real Projects',
     description: 'Turning ideas into practical solutions through hands-on learning.',
-  },
-  {
-    icon: Heart,
-    title: 'User Experience',
-    description: 'Designing experiences that feel clean, accessible, and engaging.',
   },
 ];
 

@@ -31,7 +31,6 @@ const skillCategories = [
       { name: 'Git', icon: SiGit, color: '#F05032' },
       { name: 'GitHub', icon: SiGithub, color: '#00D4FF' },
       { name: 'VS Code', icon: VsCodeIcon, color: '#007ACC' },
-      { name: 'NPM', icon: SiNpm, color: '#CB3837' },
       { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
     ],
   },
