@@ -162,14 +162,14 @@ export function Hero() {
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
             className="relative flex items-center justify-center"
           >
-            <div className="relative w-[min(82vw,540px)] aspect-square rounded-full border border-primary/40 bg-[#0d1b2a]/80 p-3 shadow-[0_0_80px_rgba(117,82,255,0.25)]">
-              <div className="absolute inset-8 rounded-full bg-primary/20 blur-3xl" />
-              <div className="absolute inset-0 rounded-full border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.28),_rgba(15,23,42,0.1)_52%,_rgba(15,23,42,0.9)_100%)]" />
-              <div className="relative h-full w-full overflow-hidden rounded-full border border-white/10 bg-slate-900/60 shadow-[inset_0_0_40px_rgba(15,23,42,0.7)]">
+            <div className="relative w-[min(82vw,540px)] aspect-square bg-[#0d1b2a]/80 p-3 shadow-[0_0_80px_rgba(117,82,255,0.25)]">
+              <div className="absolute inset-8 bg-primary/20 blur-3xl" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.28),_rgba(15,23,42,0.1)_52%,_rgba(15,23,42,0.9)_100%)]" />
+              <div className="relative h-full w-full overflow-hidden bg-slate-900/60 shadow-[inset_0_0_40px_rgba(15,23,42,0.7)]">
                 <img
                   src={portraitImage}
                   alt="Ajmal Mohamed Yaseen"
-                  className="h-full w-full object-cover object-center scale-[1.08] grayscale-[0.2] contrast-[1.1]"
+                  className="h-full w-full object-contain object-center grayscale-[0.2] contrast-[1.1]"
                   style={{ filter: 'brightness(0.96) saturate(0.9)' }}
                 />
               </div>
