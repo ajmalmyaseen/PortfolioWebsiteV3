@@ -149,10 +149,10 @@ export function Certificates() {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {[
-            { label: 'Certificates', value: '6+' },
+            { label: 'Certificates', value: '3' },
             { label: 'Hours Learning', value: '500+' },
-            { label: 'Technologies', value: '12+' },
-            { label: 'Projects Built', value: '15+' },
+            { label: 'Technologies', value: '3' },
+            { label: 'Projects Built', value: '4' },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
