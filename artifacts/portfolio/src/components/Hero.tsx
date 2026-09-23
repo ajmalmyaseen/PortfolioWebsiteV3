@@ -3,7 +3,7 @@ import { ArrowRight, Code2, Github, Linkedin, Instagram, Facebook } from 'lucide
 import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 
-const portraitImage = '/images/AJMAL.jpg';
+const portraitImage = '/images/AJMAL.png';
 const heroPatternImage = '/images/hero-bg.png';
 
 export function Hero() {

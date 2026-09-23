@@ -28,6 +28,10 @@ export default defineConfig({
     strictPort: false,
     host: '0.0.0.0',
     allowedHosts: true,
+    watch: {
+      usePolling: true,
+      interval: 1000,
+    },
   },
   preview: {
     port,
