@@ -105,11 +105,19 @@ export function Navbar() {
 
             {/* Download CV Button */}
             <Button
-              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+              variant="glow"
+              size="default"
+              asChild
+              className="hidden lg:flex"
               data-testid="button-download-cv"
             >
-              <Download className="w-4 h-4" />
-              Download CV
+              <a
+                href="/Ajmal_Mohamed_Yaseen_CV.pdf"
+                download="Ajmal_Mohamed_Yaseen_CV.pdf"
+              >
+                Download CV
+                <Download className="w-4 h-4" />
+              </a>
             </Button>
 
             {/* Mobile menu button */}
@@ -149,11 +157,18 @@ export function Navbar() {
               </button>
             ))}
             <Button
-              className="w-full mt-4 bg-gradient-to-r from-primary to-accent text-primary-foreground"
+              variant="glow"
+              asChild
+              className="w-full mt-4"
               data-testid="button-mobile-download-cv"
             >
-              <Download className="w-4 h-4 mr-2" />
-              Download CV
+              <a
+                href="/Ajmal_Mohamed_Yaseen_CV.pdf"
+                download="Ajmal_Mohamed_Yaseen_CV.pdf"
+              >
+                <Download className="w-4 h-4" />
+                Download CV
+              </a>
             </Button>
           </div>
         </div>
