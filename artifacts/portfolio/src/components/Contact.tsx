@@ -1,7 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { motion, useInView } from 'framer-motion';
 import { FormEvent, useRef, useState } from 'react';
-import { Github, Linkedin, Instagram, Facebook, ArrowRight, Send, Loader2 } from 'lucide-react';
+import { Github, Linkedin, Instagram, Facebook, Send, Loader2, Mail } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -9,6 +9,14 @@ const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 type FormStatus = { type: 'success' | 'error'; message: string } | null;
+
+const socials = [
+  { href: 'https://wa.me/918086210987?text=Hi%20Ajmal', label: 'WhatsApp', icon: FaWhatsapp },
+  { href: 'https://github.com/ajmalmyaseen/', label: 'GitHub', icon: Github },
+  { href: 'https://www.linkedin.com/in/ajmal-mohamed-yaseen/', label: 'LinkedIn', icon: Linkedin },
+  { href: 'https://www.instagram.com/aju_m.y/?hl=en/', label: 'Instagram', icon: Instagram },
+  { href: 'https://www.facebook.com/ajmal.mohamedyaseen.7/', label: 'Facebook', icon: Facebook },
+];
 
 export function Contact() {
   const ref = useRef(null);
@@ -27,9 +35,9 @@ export function Contact() {
     setStatus(null);
 
     if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
-      const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-      window.location.href = `mailto:ajmalmyaseen@gmail.com?subject=${subject}&body=${body}`;
+      const subject = encodeURIComponent('Portfolio enquiry from ' + name);
+      const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+      window.location.href = 'mailto:ajmalmyaseen@gmail.com?subject=' + subject + '&body=' + body;
       return;
     }
 
@@ -49,109 +57,94 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 grid-background opacity-20" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-full blur-3xl" />
+    <section id="contact" className="relative overflow-hidden py-28 lg:py-36" ref={ref}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(56,189,248,0.08),transparent_28rem)]" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
-            Get In Touch
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">
-            Let&apos;s Work <span className="gradient-text">Together</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I&apos;m always interested in internship opportunities, freelance projects, and collaborations.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-10"
-        >
-          <a href="https://wa.me/918086210987?text=Hi%20Ajmal" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
-            <FaWhatsapp className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="https://github.com/ajmalmyaseen/" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
-            <Github className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="https://www.linkedin.com/in/ajmal-mohamed-yaseen/" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
-            <Linkedin className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="https://www.instagram.com/aju_m.y/?hl=en/" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
-            <Instagram className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="https://www.facebook.com/ajmal.mohamedyaseen.7/" target="_blank" rel="noopener noreferrer" className="group p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/10 transition-all">
-            <Facebook className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-        </motion.div>
-
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto text-left rounded-2xl border border-border bg-card/70 p-6 sm:p-8 backdrop-blur-sm"
-        >
-          <div className="grid gap-5 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm font-medium text-foreground">
-              Name
-              <input
-                name="name"
-                type="text"
-                required
-                autoComplete="name"
-                placeholder="Your name"
-                className="h-11 rounded-lg border border-input bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-            <label className="grid gap-2 text-sm font-medium text-foreground">
-              Email
-              <input
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                placeholder="you@example.com"
-                className="h-11 rounded-lg border border-input bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-          </div>
-          <label className="mt-5 grid gap-2 text-sm font-medium text-foreground">
-            Message
-            <textarea
-              name="message"
-              required
-              rows={5}
-              placeholder="Tell me a little about your project..."
-              className="resize-y rounded-lg border border-input bg-background/70 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
-            />
-          </label>
-          <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-muted-foreground">Your message goes straight to my inbox.</p>
-            <button
-              type="submit"
-              disabled={isSending}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary to-accent px-5 font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              {isSending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-              {isSending ? 'Sending...' : 'Send Message'}
-            </button>
-          </div>
-          {status && (
-            <p role="status" className={`mt-4 text-sm ${status.type === 'success' ? 'text-emerald-400' : 'text-destructive'}`}>
-              {status.message}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -25 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-sky-300/75">05 / Contact</p>
+            <h2 className="mt-4 font-display text-4xl font-bold tracking-[-0.05em] text-white sm:text-5xl">
+              Let&apos;s <span className="gradient-text">connect.</span>
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-7 text-slate-400">
+              I&apos;m always interested in internship opportunities, freelance projects, and collaborations.
             </p>
-          )}
-        </motion.form>
+
+            <a
+              href="mailto:ajmalmyaseen@gmail.com"
+              className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/[0.09] bg-white/[0.025] px-4 py-3 text-sm text-slate-200 transition hover:border-sky-400/25 hover:bg-white/[0.05]"
+            >
+              <Mail className="h-4 w-4 text-sky-300" />
+              ajmalmyaseen@gmail.com
+            </a>
+
+            <div className="mt-7 flex flex-wrap gap-2">
+              {socials.map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-400 transition hover:-translate-y-1 hover:border-sky-400/30 hover:text-sky-300"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.form
+            initial={{ opacity: 0, y: 25 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            onSubmit={handleSubmit}
+            className="rounded-3xl border border-white/[0.09] bg-white/[0.025] p-6 shadow-[0_30px_90px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-8"
+          >
+            <div className="mb-7 flex items-center justify-between">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500">Send a message</p>
+                <h3 className="mt-1 text-lg font-semibold text-white">Start a conversation</h3>
+              </div>
+              <span className="font-mono text-[9px] text-slate-600">05 / 05</span>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="grid gap-2 text-sm font-medium text-slate-300">
+                Name
+                <input name="name" type="text" required autoComplete="name" placeholder="Your name" className="h-12 rounded-xl border border-white/[0.08] bg-black/20 px-4 text-white outline-none transition placeholder:text-slate-600 focus:border-sky-400/45 focus:ring-4 focus:ring-sky-400/[0.06]" />
+              </label>
+              <label className="grid gap-2 text-sm font-medium text-slate-300">
+                Email
+                <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="h-12 rounded-xl border border-white/[0.08] bg-black/20 px-4 text-white outline-none transition placeholder:text-slate-600 focus:border-sky-400/45 focus:ring-4 focus:ring-sky-400/[0.06]" />
+              </label>
+            </div>
+
+            <label className="mt-5 grid gap-2 text-sm font-medium text-slate-300">
+              Message
+              <textarea name="message" required rows={6} placeholder="Tell me a little about your project..." className="resize-y rounded-xl border border-white/[0.08] bg-black/20 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-sky-400/45 focus:ring-4 focus:ring-sky-400/[0.06]" />
+            </label>
+
+            <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs text-slate-600">Your message goes straight to my inbox.</p>
+              <button type="submit" disabled={isSending} className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-70">
+                {isSending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                {isSending ? 'Sending...' : 'Send Message'}
+              </button>
+            </div>
+
+            {status && (
+              <p role="status" className={'mt-4 text-sm ' + (status.type === 'success' ? 'text-emerald-400' : 'text-red-400')}>
+                {status.message}
+              </p>
+            )}
+          </motion.form>
+        </div>
       </div>
     </section>
   );
