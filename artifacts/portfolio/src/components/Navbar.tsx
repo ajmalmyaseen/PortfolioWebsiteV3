@@ -1,177 +1,122 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { Download } from 'lucide-react';
+import { Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Certificates', href: '#certificates' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
-  const { scrollYProgress } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.substring(1));
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
+      setIsScrolled(window.scrollY > 30);
+      const current = navItems
+        .map((item) => item.href.substring(1))
+        .find((section) => {
+          const element = document.getElementById(section);
+          if (!element) return false;
           const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
-        }
-        return false;
-      });
-      
-      if (current) {
-        setActiveSection(current);
-      }
+          return rect.top <= 160 && rect.bottom >= 160;
+        });
+      if (current) setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = (href: string) => {
-    const element = document.getElementById(href.substring(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(href.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
   };
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent z-50 origin-left"
+        className="fixed left-0 right-0 top-0 z-[60] h-px origin-left bg-gradient-to-r from-sky-400 via-indigo-400 to-transparent"
         style={{ scaleX: scrollYProgress }}
       />
-      
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-lg' 
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <button
-              onClick={() => handleNavClick('#hero')}
-              className="group relative"
-              data-testid="logo-button"
-            >
-              <div className="relative">
-                <span className="font-display text-2xl font-bold gradient-text">
-                  AMY
-                </span>
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
+
+      <nav className={'fixed left-0 right-0 top-0 z-50 transition-all duration-300 ' + (isScrolled ? 'border-b border-white/[0.07] bg-[#03060b]/78 shadow-2xl backdrop-blur-2xl' : 'bg-transparent')}>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex h-[76px] items-center justify-between">
+            <button onClick={() => handleNavClick('#hero')} className="group flex items-center gap-2" aria-label="Go to home">
+              <span className="font-display text-2xl font-bold tracking-[-0.08em] text-white">AMY</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.8)]" />
             </button>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden items-center gap-1 lg:flex">
+              {navItems.map((item) => {
+                const active = activeSection === item.href.substring(1);
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => handleNavClick(item.href)}
+                    className={'relative px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ' + (active ? 'text-white' : 'text-slate-500 hover:text-slate-200')}
+                  >
+                    {item.label}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-active"
+                        className="absolute -bottom-1 left-3 right-3 h-px bg-sky-400"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            <Button asChild variant="outline" className="hidden h-10 rounded-full border-white/10 bg-white/[0.03] px-4 text-xs text-slate-200 hover:bg-white/[0.08] lg:flex">
+              <a href="/Ajmal_Mohamed_Yaseen_CV.pdf" download="Ajmal_Mohamed_Yaseen_CV.pdf">
+                Download CV
+                <Download className="ml-2 h-3.5 w-3.5" />
+              </a>
+            </Button>
+
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-slate-200 lg:hidden"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <div className="border-t border-white/[0.07] bg-[#03060b]/95 px-6 py-5 backdrop-blur-2xl lg:hidden">
+            <div className="mx-auto max-w-7xl space-y-1">
               {navItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  data-testid={`nav-link-${item.label.toLowerCase()}`}
+                  className={'block w-full rounded-xl px-4 py-3 text-left font-mono text-xs uppercase tracking-[0.12em] ' + (activeSection === item.href.substring(1) ? 'bg-sky-400/10 text-sky-300' : 'text-slate-400 hover:bg-white/[0.04] hover:text-white')}
                 >
                   {item.label}
-                  {activeSection === item.href.substring(1) && (
-                    <motion.div
-                      layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
                 </button>
               ))}
+              <Button asChild className="mt-3 w-full rounded-xl bg-white text-slate-950 hover:bg-slate-100">
+                <a href="/Ajmal_Mohamed_Yaseen_CV.pdf" download="Ajmal_Mohamed_Yaseen_CV.pdf">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download CV
+                </a>
+              </Button>
             </div>
-
-            {/* Download CV Button */}
-            <Button
-              variant="glow"
-              size="default"
-              asChild
-              className="hidden lg:flex"
-              data-testid="button-download-cv"
-            >
-              <a
-                href="/Ajmal_Mohamed_Yaseen_CV.pdf"
-                download="Ajmal_Mohamed_Yaseen_CV.pdf"
-              >
-                Download CV
-                <Download className="w-4 h-4" />
-              </a>
-            </Button>
-
-            {/* Mobile menu button */}
-            <button
-              className="lg:hidden p-2 text-foreground"
-              onClick={() => {
-                const menu = document.getElementById('mobile-menu');
-                menu?.classList.toggle('hidden');
-              }}
-              data-testid="button-mobile-menu"
-            >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div id="mobile-menu" className="hidden lg:hidden border-t border-border bg-card/95 backdrop-blur-xl">
-          <div className="px-6 py-4 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => {
-                  handleNavClick(item.href);
-                  document.getElementById('mobile-menu')?.classList.add('hidden');
-                }}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                  activeSection === item.href.substring(1)
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                }`}
-                data-testid={`mobile-nav-link-${item.label.toLowerCase()}`}
-              >
-                {item.label}
-              </button>
-            ))}
-            <Button
-              variant="glow"
-              asChild
-              className="w-full mt-4"
-              data-testid="button-mobile-download-cv"
-            >
-              <a
-                href="/Ajmal_Mohamed_Yaseen_CV.pdf"
-                download="Ajmal_Mohamed_Yaseen_CV.pdf"
-              >
-                <Download className="w-4 h-4" />
-                Download CV
-              </a>
-            </Button>
-          </div>
-        </div>
+        )}
       </nav>
     </>
   );
