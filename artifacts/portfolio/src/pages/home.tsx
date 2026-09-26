@@ -3,7 +3,7 @@ import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Projects } from '@/components/Projects';
 import { Skills } from '@/components/Skills';
-import { Certificates } from '@/components/Certificates';
+import { Experience } from '@/components/Experience';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -15,9 +15,9 @@ export default function Home() {
       <main>
         <Hero />
         <About />
-        <Projects />
         <Skills />
-        <Certificates />
+        <Projects />
+        <Experience />
         <Contact />
       </main>
       <Footer />
@@ -25,4 +25,3 @@ export default function Home() {
     </div>
   );
 }
-
